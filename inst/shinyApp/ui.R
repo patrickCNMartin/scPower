@@ -326,6 +326,7 @@ body <- ## Body content
                               max = 100, value = c(10, 50)),
                   bsPopover("cellsCT", title="Minimal number of cells:", placement="top", options = list(container = "body"),
                             content="How many cells of the target cell type should at least be detected for each individual"),
+                  textInput("imgDim", label="Image Dimensions (w x h - 1200x800)", value="1200x800"),
                   hr(),
                   width = 4
                   ),

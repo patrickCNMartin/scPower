@@ -16,7 +16,9 @@ shinyServer(
       numSamples<-input$numSamples
       ctFreq<-input$ctFreq
       prob<-input$probCT
-
+      dims <- strsplit(input$imgDim,"x")
+      w <- dims[[1]][1]
+      h <- dims[[1]][2]
       #Number of cells required
       N.min.cells<-seq(input$cellsCT[1],input$cellsCT[2],by=5)
 
@@ -30,14 +32,21 @@ shinyServer(
                                                   parameter.combinations$cell.type.frac,
                                                   parameter.combinations$num.indivs)
 
-      plot_ly(parameter.combinations, x = ~min.num.cells, y = ~sample.size,
+      p <- plot_ly(parameter.combinations, x = ~min.num.cells, y = ~sample.size,
               type = 'scatter', mode = 'lines+markers',
               hoverinfo = 'text',
               text = ~paste('Minimal number cells per celltype: ',min.num.cells,
                             '<br> Cells per individuum: ', sample.size))%>%
         layout(xaxis = list(title="Minimal number of cells from target cell type per individuum"),
                yaxis = list(title="Cells per individuum"))
-
+      p
+      # plotly_IMAGE(p, 
+      #            width = w, 
+      #            height = h, 
+      #            format = "png", 
+      #            scale = 1, 
+      #            out_file = "output.png")
+        
     })
 
     ###############################
